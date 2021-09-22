@@ -28,53 +28,67 @@ test_strings = ["hello", "world", "python", ]
 def test_1_1(*test_strings):
 	test_strings = list(test_strings)
 	result = set()
+	list_in = []
 	for word in test_strings:
 		letters = list(word)
 		for let in letters:
+			counter = 0
 			for i in range(len(test_strings)):
 				if let in test_strings[i]:
-					pass
+					counter = counter+1
+					if counter == len(test_strings):
+						list_in.append(let)
 				else:
-					break 
-			else:
-				result.add(let)
-	return result
+					break
+	return (set(list_in))
 
 def test_1_2(*test_strings):
 	test_strings = list(test_strings)
 	result = set()
+	list_in = []
 	for word in test_strings:
 		letters = list(word)
 		for let in letters:
-			result.add(let)
-	return result
+			for i in range(len(test_strings)):
+				if let in test_strings[i]:
+					list_in.append(let)
+				else:
+					pass				
+
+	return set(list_in)
 
 def test_1_3(*test_strings):
 	test_strings = list(test_strings)
-	result=set()
+	result = set()
+	list_in = []
 	for word in test_strings:
 		letters = list(word)
 		for let in letters:
-			count_for_letter = 0
+			counter = 0
 			for i in range(len(test_strings)):
 				if let in test_strings[i]:
-					count_for_letter+=1
-			if count_for_letter>=2:
-				result.add(let)
-	return result
+					counter = counter+1
+					if counter >= 2:
+						list_in.append(let)
+				else:
+					pass
+	return (set(list_in))
+
 
 def test_1_4(*test_strings):
 	test_strings = list(test_strings)
-	alphabet = ("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
 	result = set()
-	for letter in alphabet:
-		for word in test_strings:
-			if letter not in word.lower():
-				pass
-			else:
-				break
-		else:
-			result.add(letter)
+	list_in = []
+	alphabet = ("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
+	for word in test_strings:
+		letters = list(word)
+		for let in letters:
+			for i in range(len(test_strings)):
+				if let in test_strings[i]:
+					list_in.append(let)
+				else:
+					pass
+	result = set(alphabet).difference(set(list_in))
 	return result
 
 print(test_1_1(*test_strings))
