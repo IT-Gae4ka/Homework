@@ -2,7 +2,7 @@ import argparse
 import logging
 from datetime import datetime
 import unittest
-from interface import create_parser
+from .interface import create_parser
 
 
 class ParserTest(unittest.TestCase):

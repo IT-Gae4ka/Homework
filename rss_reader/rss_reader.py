@@ -6,11 +6,11 @@ import logging
 class RssReader():
     """Reads news from RssStorage. Takes arguments
     source, limit, date, json from interface."""
-    def __init__(self, source, limit, date, json):
+    def __init__(self, source, limit, date, output_format):
         self._source = source
         self._limit = limit
         self._date = date
-        self._json = json
+        self._format = output_format
 
     def read_news(self):
         """Checks the arguments inputed by user.
@@ -53,7 +53,9 @@ class RssReader():
             cache_writer = writers.CacheWriter()
             cache_writer.write(storage.get_news())
 
-        writer = writers.JsonWriter() if self._json else writers.ConsoleWriter()
+        writers_by_format = {'json': writers.JsonWriter, 'console': writers.ConsoleWriter,
+            'html': writers.HtmlWriter, 'pdf': writers.PdfWriter}
+        writer = writers_by_format[self._format]()
         writer.write(storage.get_news())
 
 
@@ -61,7 +63,16 @@ def main():
     """Creates object of RssReader class.
     Calls method read_news."""
     logging.info('Running main() function. Class RssReader().')
-    parser_4 = RssReader(args.source, args.limit, args.date, args.json)
+    if args.json:
+        output_format = 'json'
+    elif args.html:
+        output_format = 'html'
+    elif args.pdf:
+        output_format = 'pdf'
+    else:
+        output_format = 'console'
+        
+    parser_4 = RssReader(args.source, args.limit, args.date, output_format)
     parser_4.read_news()
 
 

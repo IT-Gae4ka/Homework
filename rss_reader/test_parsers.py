@@ -1,5 +1,5 @@
-from rss_item import RssItem
-from utils import Console, date_to_str, NewsEncoder, open_cache_file_for_write
+from .rss_item import RssItem
+from .utils import Console, date_to_str, NewsEncoder, open_cache_file_for_write
 from abc import ABCMeta, abstractmethod
 import csv
 import logging

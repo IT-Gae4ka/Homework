@@ -1,4 +1,4 @@
-from rss_item import RssItem
+from .rss_item import RssItem
 import utils
 from abc import ABCMeta, abstractmethod
 import csv
@@ -8,7 +8,7 @@ from io import StringIO
 import sys
 from unittest import mock
 from datetime import datetime
-from writers import CacheWriter, JsonWriter, Console
+from .writers import CacheWriter, JsonWriter, Console
 
 news = [RssItem('Employee who killed gunman likely saved lives, police say', datetime(2021, 10, 22), 'https://news.yahoo.com/employee-killed-gunman-likely-saved-211530368.html'),
         RssItem('A 55-year-old mother of 9 was sentenced to death by hanging over possessing around 4 ounces of meth',

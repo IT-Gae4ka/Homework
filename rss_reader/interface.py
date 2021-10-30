@@ -19,7 +19,7 @@ def create_parser():
     parser.add_argument("source", nargs='?', default=None, type=str,
                         help="RSS URL")
     parser.add_argument("--version", action='version',
-                        version='Version 3.0', help="Print version info")
+                        version='Version 4.0', help="Print version info")
     parser.add_argument("--json", action="store_true",
                         help="Print result as JSON in stdout")
     parser.add_argument("--limit", type=int, default=None,
@@ -29,10 +29,12 @@ def create_parser():
                         help="Outputs verbose status messages")
     parser.add_argument("--date", help="The date - format YYYYMMDD",
                         default=None, type=valid_date)
-
+    parser.add_argument("--html", action="store_true",
+                        help="Save results as HTML file")
+    parser.add_argument("--pdf", action="store_true",
+                        help="Save results as PDF file")
+    
     return parser
-
-
 
 
 args = create_parser().parse_args()
