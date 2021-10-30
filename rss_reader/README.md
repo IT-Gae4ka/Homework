@@ -22,3 +22,12 @@ Stdout json structure:
 As an example of a SOURCE you may write:
 	https://news.yahoo.com/rss/
 	https://www.livemint.com/rss/politics
+
+ITERATION-3
+
+Cached news are kept in article.csv file.
+News are written by function write of class CacheWriter (writers.py).
+Cache structure:
+	title
+	date
+	link

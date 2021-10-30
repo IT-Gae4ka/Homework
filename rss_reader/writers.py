@@ -1,5 +1,5 @@
-from rss_item import RssItem
-from utils import Console, date_to_str, NewsEncoder, open_cache_file_for_write
+from .rss_item import RssItem
+from .utils import Console, date_to_str, NewsEncoder, open_cache_file_for_write
 from abc import ABCMeta, abstractmethod
 import csv
 import logging
@@ -9,6 +9,7 @@ class Writer(metaclass=ABCMeta):
     """Abstract class with write method. Takes news."""
     @abstractmethod
     def write(self, news):
+        """Abstract method for writing."""
         pass
 
 
@@ -42,5 +43,5 @@ class ConsoleWriter(Writer):
                 title = item.title
                 date = date_to_str(item.date)
                 link = item.link
-                print(f"Title: {title}\n\nDate: {date}\n\nLink: {link}\n\n\
+                console.write(f"Title: {title}\n\nDate: {date}\n\nLink: {link}\n\n\
                 --------------\n\n")

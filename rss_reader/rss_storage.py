@@ -1,4 +1,4 @@
-from rss_item import RssItem
+from .rss_item import RssItem
 import logging
 
 

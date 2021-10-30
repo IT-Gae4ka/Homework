@@ -1,7 +1,7 @@
 import requests
 import sys
 import json
-from rss_item import RssItem
+from .rss_item import RssItem
 from datetime import datetime
 import logging
 
@@ -16,13 +16,13 @@ def get_url_contents(url):
 
 
 def open_cache_file_for_read():
-    """Opens csv file for reading news from cache."""
+    """Opens csv file for reading news"""
     logging.info('Running open_cache_file_for_read() function from utils.py.')
     return open('articles.csv', 'r', newline='', encoding='utf-8')
 
 
 def open_cache_file_for_write():
-    """Opens csv file for writhing cache."""
+    """Opens csv file for writhing cache"""
     logging.info('Running open_cache_file_for_write() function from utils.py.')
     return open('articles.csv', 'a', newline='', encoding='utf-8')
 
@@ -45,8 +45,7 @@ def date_from_str(s):
 
 
 def date_to_str(date):
-    """Takes attribute in datetime format.
-    Changes date into string of %Y-%m-%d format"""
+    """Changes date into string of %Y-%m-%d format"""
     logging.info('Running date_to_str() function from utils.py.')
 
     assert(isinstance(date, datetime))
@@ -90,3 +89,18 @@ class NewsEncoder(json.JSONEncoder):
                     'link': (obj.link)}
 
         return json.JSONEncoder.default(self, obj)
+
+
+class NewsDecoder(json.JSONDecoder):
+    """Decodes dict into json object."""
+    def __init__(self, *args, **kwargs):
+        json.JSONDecoder.__init__(self, object_hook=self.object_hook,
+                                  *args, **kwargs)
+
+    def object_hook(self, dct):
+        """decodes dict into json object."""
+        logging.info('Running object_hook() function from utils.py.\
+                     Class NewsDecoder(json.JSONDecoder).')
+        if 'title' in dct:
+            return RssItem(dct['title'], date_from_str(dct['date']),
+                           dct['link'])
